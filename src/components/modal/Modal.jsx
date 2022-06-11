@@ -1,18 +1,42 @@
 import React, { useState } from "react";
-// import { ReactDOM } from "react";
 import ReactDOM from "react-dom";
-import { useHandleSubmit } from "../hooks/useHandleSubmit";
-import Input from "../input/Input";
-import Label from "../label/Label";
-import Button from "./Button";
-
+import InputHookForm from "../input/InputHookForm";
+import { set, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Modal = ({
   className,
   open = false,
   onClick = () => {},
-  onChange = () => {},
+  onSubmitValue = () => {},
+  onInputValue = () => {},
 }) => {
-  const { values, handleSubmitForm } = useHandleSubmit();
+  const [value, setValue] = useState();
+  const schemaValidation = yup.object({
+    id: yup.string().required("Please enter ID").max(2),
+    fullName: yup.string().required("Please enter fullname").max(20),
+    address: yup.string().required("Please enter address").max(20),
+    phone: yup.string().required("Please enter phone").max(11),
+    email: yup.string().required("Please enter email").max(20),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm({ resolver: yupResolver(schemaValidation) });
+
+  const onSubmit = (data) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        onSubmitValue(data);
+        toast("Create student succesfully");
+        setValue(data);
+        setValue("");
+      }, 2000);
+    });
+  };
   if (typeof document === "undefined") return <div className="modal"></div>;
 
   return ReactDOM.createPortal(
@@ -22,7 +46,7 @@ const Modal = ({
       }`}
     >
       <div className="overlay absolute inset-0 bg-black bg-opacity-25"></div>
-      <div className="modal-content p-10 bg-white w-[420px] h-[650px] z-10 relative">
+      <div className="modal-content p-10 bg-white w-[420px] h-[720px] z-10 relative rounded-lg">
         <span
           onClick={onClick}
           className="absolute bg-white top-0 right-0 cursor-pointer flex justify-center items-center w-10 h-10 rounded-full -translate-y-2/4 translate-x-2/4"
@@ -44,38 +68,19 @@ const Modal = ({
         </span>
         <div>
           <h1 className="text-xl font-bold text-center">STUDENT</h1>
-          <form action="" onSubmit={handleSubmitForm}>
-            <Label text="ID"></Label>
-            <Input onChange={onChange} name="id"></Input>
-            <Label text="UserName"></Label>
-            <Input onChange={onChange} name="fullname"></Input>
-            <Label text="Adrress"></Label>
-            <Input onChange={onChange} name="address"></Input>
-            <Label text="Phone"></Label>
-            <Input onChange={onChange} name="phone" type="phone"></Input>
-            <Label text="Email"></Label>
-            <Input onChange={onChange} name="email" type="email"></Input>
-            <div className="flex justify-center items-center">
-              <Button className="bg-blue-500 mt-5 " type="submit">
-                Thêm
-              </Button>
-            </div>
-          </form>
+          <InputHookForm
+            isSubmitting={isSubmitting}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            register={register}
+            value={value}
+          ></InputHookForm>
         </div>
       </div>
     </div>,
     document.querySelector("body")
   );
-  // <div
-  //   className={`w-[500px] h-[500px] bg-slate-500 sha inset-1/2 translate-x-[-50%] translate-y-[-50%] ${className} rounded-md shadow-xl`}
-  // >
-  //   <p>
-  //     Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-  //     molestiae aspernatur inventore tempore consequuntur aliquid dolorum
-  //     porro! Sequi eius quae fugiat totam rerum, eaque, modi eos est tempore
-  //     laborum hic!
-  //   </p>
-  // </div>
 };
 
 export default Modal;

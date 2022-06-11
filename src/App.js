@@ -1,16 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Home from "./components/home/Home";
-import Modal from "./components/modal/Modal";
-import ModalAdd from "./components/content/head/ModalAdd";
+// import "sass";/
+import { ToastContainer } from "react-toastify";
+import Container from "./components/container/Container";
 
 function App() {
   return (
     <div className="App">
-      {/* <div>
-        <Modal open={true}></Modal>
-      </div> */}
-      <Home></Home>
+      <Container></Container>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

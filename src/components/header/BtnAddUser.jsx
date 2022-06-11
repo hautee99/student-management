@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import Modal from "../../modal/Modal";
+import React from "react";
 
-const ModalAdd = ({ onClick = () => {} }) => {
-
+const BtnAddUser = ({ onClick }) => {
   return (
     <div>
       <button
@@ -15,4 +13,4 @@ const ModalAdd = ({ onClick = () => {} }) => {
   );
 };
 
-export default ModalAdd;
+export default BtnAddUser;
