@@ -7,7 +7,6 @@ const InputHookForm = ({
   isSubmitting,
   value,
 }) => {
-  const resetInputValue = () => {};
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -84,31 +83,18 @@ const InputHookForm = ({
       {errors?.email && (
         <div className="text-red-500 text-sm">{errors.email?.message}</div>
       )}
-      <div className="flex justify-center items-center">
-        <div>
-          <button
-            type="submit"
-            className=" p-2 bg-blue-600 text-white font-semibold rounded-lg"
-          >
-            {isSubmitting ? (
-              <div className="mx-auto w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin"></div>
-            ) : (
-              "Submit"
-            )}
-          </button>
-        </div>
-        <div>
-          <button
-            type="submit"
-            className=" p-2 bg-blue-600 text-white font-semibold rounded-lg"
-          >
-            {isSubmitting ? (
-              <div className="mx-auto w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin"></div>
-            ) : (
-              "Update"
-            )}
-          </button>
-        </div>
+      <div className="flex flex-col gap-2 mb-3"></div>
+      <div>
+        <button
+          type="submit"
+          className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg"
+        >
+          {isSubmitting ? (
+            <div className="mx-auto w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin"></div>
+          ) : (
+            "Submit"
+          )}
+        </button>
       </div>
     </form>
   );

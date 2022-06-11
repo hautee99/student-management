@@ -30,10 +30,9 @@ const Modal = ({
   const onSubmit = (data) => {
     return new Promise((resolve) => {
       setTimeout(() => {
+        resolve();
         onSubmitValue(data);
         toast("Create student succesfully");
-        setValue(data);
-        setValue("");
       }, 2000);
     });
   };

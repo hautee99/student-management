@@ -1,8 +1,11 @@
 import React from "react";
 import BtnAddUser from "../header/BtnAddUser";
 import InputSearch from "../header/InputSearch";
+import { useModalClose } from "../hooks/useModalClose";
+import Modal from "../modal/Modal";
 
-const Header = ({ onClickModal }) => {
+const Header = ({ onClickModal, handleSubmitValue }) => {
+  const { modal, handleModalClose } = useModalClose();
   return (
     <div>
       <div className="w-full h-48 bg-blue-400">
@@ -13,9 +16,14 @@ const Header = ({ onClickModal }) => {
 
         <div className="flex justify-center items-center ">
           <InputSearch></InputSearch>
-          <BtnAddUser onClick={onClickModal}></BtnAddUser>
+          <BtnAddUser onClick={handleModalClose}></BtnAddUser>
         </div>
       </div>
+      <Modal
+        open={modal}
+        onClick={handleModalClose}
+        onSubmitValue={handleSubmitValue}
+      ></Modal>
     </div>
   );
 };

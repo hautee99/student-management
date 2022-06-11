@@ -68,23 +68,19 @@ const Container = () => {
   const handleUpdateStudent = (id) => {
     handleModalClose(modal);
     // setStudentList((prev) =>
-    //   // prev.map((item) => (item.id === id ? : item))
+    //   prev.map((item) => (item.id === id ? "update" : item))
     // );
   };
   return (
     <div className="w-full h-full bg-blue-100">
-      <Header onClickModal={handleModalClose}></Header>
+      <Header handleSubmitValue={handleSubmitValue}></Header>
       <Content
         studentList={studentList}
         onClickModal={handleModalClose}
         handleDeleteStudent={handleDeleteStudent}
         handleUpdateStudent={handleUpdateStudent}
       ></Content>
-      <Modal
-        open={modal}
-        onClick={handleModalClose}
-        onSubmitValue={handleSubmitValue}
-      ></Modal>
+      <Modal open={modal} onSubmitValue={handleSubmitValue}></Modal>
     </div>
   );
 };
