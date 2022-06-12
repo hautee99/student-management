@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useModalClose } from "../hooks/useModalClose";
 import Modal from "../modal/Modal";
 import Content from "./Content";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 // import "sweetalert2/src/sweetalert2.scss";
 const Container = () => {
   const { modal, handleModalClose } = useModalClose();
+  const [studentId, setStudentId] = useState();
   const [studentList, setStudentList] = useState([
     {
       id: 1,
@@ -56,7 +57,7 @@ const Container = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, deleted it!",
     }).then((result) => {
       if (result.isConfirmed) {
         const newstudentArr = [...studentList].filter((item) => item.id !== id);
@@ -65,22 +66,50 @@ const Container = () => {
       }
     });
   };
-  const handleUpdateStudent = (id) => {
+
+  const handleClickStudentID = (id) => {
     handleModalClose(modal);
-    // setStudentList((prev) =>
-    //   prev.map((item) => (item.id === id ? "update" : item))
-    // );
+    setStudentId(id);
   };
+
+  const handleUpdateStudent = (data) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, update it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setStudentList((prev) =>
+          prev.map((item) => (item.id === studentId ? data : item))
+        );
+        Swal.fire("Updated!", "Your file has been updated.", "success");
+        handleModalClose(modal);
+      } else if (!result.isConfirmed) {
+        handleModalClose(modal);
+      }
+    });
+  };
+
   return (
     <div className="w-full h-full bg-blue-100">
       <Header handleSubmitValue={handleSubmitValue}></Header>
       <Content
         studentList={studentList}
-        onClickModal={handleModalClose}
+        // onClickModal={handleModalClose}
         handleDeleteStudent={handleDeleteStudent}
+        handleClickStudentID={handleClickStudentID}
         handleUpdateStudent={handleUpdateStudent}
       ></Content>
-      <Modal open={modal} onSubmitValue={handleSubmitValue}></Modal>
+      <Modal
+        open={modal}
+        onClick={handleModalClose}
+        onSubmitValue={handleSubmitValue}
+        handleUpdateStudent={handleUpdateStudent}
+      ></Modal>
     </div>
   );
 };

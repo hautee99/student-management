@@ -4,7 +4,7 @@ import InputSearch from "../header/InputSearch";
 import { useModalClose } from "../hooks/useModalClose";
 import Modal from "../modal/Modal";
 
-const Header = ({ onClickModal, handleSubmitValue }) => {
+const Header = ({ onClickModal, handleSubmitValue, children }) => {
   const { modal, handleModalClose } = useModalClose();
   return (
     <div>
@@ -23,6 +23,8 @@ const Header = ({ onClickModal, handleSubmitValue }) => {
         open={modal}
         onClick={handleModalClose}
         onSubmitValue={handleSubmitValue}
+        type="submit"
+        typeModal="submit"
       ></Modal>
     </div>
   );

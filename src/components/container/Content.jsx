@@ -4,8 +4,8 @@ import Button from "../modal/Button";
 import Modal from "../modal/Modal";
 const Content = ({
   studentList,
-  onClickModal,
   handleDeleteStudent,
+  handleClickStudentID,
   handleUpdateStudent,
 }) => {
   const { modal, handleModalClose } = useModalClose();
@@ -51,7 +51,10 @@ const Content = ({
                       />
                     </svg>
                   </Button>
-                  <Button onClick={handleModalClose} className="bg-blue-500">
+                  <Button
+                    onClick={() => handleClickStudentID(item.id)}
+                    className="bg-blue-500"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -73,7 +76,13 @@ const Content = ({
           ))}
         </tbody>
       </table>
-      <Modal open={modal} onClick={handleModalClose}></Modal>
+      <Modal
+        open={modal}
+        type="update"
+        typeModal="update"
+        handleUpdateStudent={handleUpdateStudent}
+        onClick={handleModalClose}
+      ></Modal>
     </div>
   );
 };

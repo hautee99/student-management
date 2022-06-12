@@ -11,7 +11,9 @@ const Modal = ({
   open = false,
   onClick = () => {},
   onSubmitValue = () => {},
-  onInputValue = () => {},
+  handleUpdateStudent = () => {},
+  type,
+  typeModal,
 }) => {
   const [value, setValue] = useState();
   const schemaValidation = yup.object({
@@ -26,7 +28,6 @@ const Modal = ({
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
   } = useForm({ resolver: yupResolver(schemaValidation) });
-
   const onSubmit = (data) => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -36,6 +37,16 @@ const Modal = ({
       }, 2000);
     });
   };
+  const onUpdate = (data) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+        handleUpdateStudent(data);
+        // toast("Update student succesfully");
+      }, 2000);
+    });
+  };
+
   if (typeof document === "undefined") return <div className="modal"></div>;
 
   return ReactDOM.createPortal(
@@ -67,14 +78,29 @@ const Modal = ({
         </span>
         <div>
           <h1 className="text-xl font-bold text-center">STUDENT</h1>
-          <InputHookForm
-            isSubmitting={isSubmitting}
-            errors={errors}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            value={value}
-          ></InputHookForm>
+          {typeModal === "submit" ? (
+            <InputHookForm
+              isSubmitting={isSubmitting}
+              errors={errors}
+              handleSubmit={handleSubmit}
+              onSubmit={onSubmit}
+              register={register}
+              value={value}
+              type={type}
+              typeModal={typeModal}
+            ></InputHookForm>
+          ) : (
+            <InputHookForm
+              isSubmitting={isSubmitting}
+              handleSubmit={handleSubmit}
+              onUpdate={onUpdate}
+              errors={errors}
+              typeModal={typeModal}
+              register={register}
+              value={value}
+              type={type}
+            ></InputHookForm>
+          )}
         </div>
       </div>
     </div>,
