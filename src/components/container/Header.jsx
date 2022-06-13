@@ -4,7 +4,12 @@ import InputSearch from "../header/InputSearch";
 import { useModalClose } from "../hooks/useModalClose";
 import Modal from "../modal/Modal";
 
-const Header = ({ onClickModal, handleSubmitValue, children }) => {
+const Header = ({
+  onClickModal,
+  handleSubmitValue,
+  handleInputValue,
+  onInputValue,
+}) => {
   const { modal, handleModalClose } = useModalClose();
   return (
     <div>
@@ -15,7 +20,7 @@ const Header = ({ onClickModal, handleSubmitValue, children }) => {
         {/* <UserTable students={studentList} onClick={handleModalClose}></UserTable> */}
 
         <div className="flex justify-center items-center ">
-          <InputSearch></InputSearch>
+          <InputSearch handleInputValue={handleInputValue}></InputSearch>
           <BtnAddUser onClick={handleModalClose}></BtnAddUser>
         </div>
       </div>

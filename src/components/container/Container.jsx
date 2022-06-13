@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useModalClose } from "../hooks/useModalClose";
 import Modal from "../modal/Modal";
 import Content from "./Content";
@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 const Container = () => {
   const { modal, handleModalClose } = useModalClose();
   const [studentId, setStudentId] = useState();
+  const [input, setInput] = useState("");
+  const typingTimeoutRef = useRef(null);
   const [studentList, setStudentList] = useState([
     {
       id: 1,
@@ -93,10 +95,77 @@ const Container = () => {
       }
     });
   };
+  const handleChangeString = (str) => {
+    let strValue = "";
+    strValue = str
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/đ/g, "d")
+      .replace(/Đ/g, "D");
+    return strValue;
+  };
+
+  const handleSearchStudent = (value) => {
+    const strValue = handleChangeString(value);
+    // setInput(strValue);
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+    typingTimeoutRef.current = setTimeout(() => {
+      const searchStudent = [...studentList].filter((item) =>
+        handleChangeString(item.fullName).includes(strValue.toLowerCase())
+      );
+      if (value === "") {
+        setStudentList([
+          {
+            id: 1,
+            fullName: "Nguyễn Văn Thành",
+            address: "Nam Định",
+            phone: "0898279836",
+            email: "haute123456@gmail.com",
+          },
+          {
+            id: 2,
+            fullName: "Phạm Trung Kiên",
+            address: "Hà Nội",
+            phone: "0918509286",
+            email: "haute123456@gmail.com",
+          },
+          {
+            id: 3,
+            fullName: "Phan Tấn Khang",
+            address: "Bắc Ninh",
+            phone: "0613509235",
+            email: "haute123456@gmail.com",
+          },
+          {
+            id: 4,
+            fullName: "Nguyễn Thành Long",
+            address: "Ninh Bình",
+            phone: "0923904091",
+            email: "haute123456@gmail.com",
+          },
+          {
+            id: 5,
+            fullName: "Lê Tuấn Tú",
+            address: "Hải Dương",
+            phone: "0932959000",
+            email: "haute123456@gmail.com",
+          },
+        ]);
+      } else {
+        setStudentList(searchStudent);
+      }
+    }, 300);
+  };
 
   return (
     <div className="w-full h-full bg-blue-100">
-      <Header handleSubmitValue={handleSubmitValue}></Header>
+      <Header
+        handleSubmitValue={handleSubmitValue}
+        handleInputValue={handleSearchStudent}
+      ></Header>
       <Content
         studentList={studentList}
         // onClickModal={handleModalClose}
