@@ -4,15 +4,17 @@ import Modal from "../modal/Modal";
 import Content from "./Content";
 import Header from "./Header";
 import Swal from "sweetalert2";
+import { v4 as id } from "uuid";
 // import "sweetalert2/src/sweetalert2.scss";
 const Container = () => {
   const { modal, handleModalClose } = useModalClose();
   const [studentId, setStudentId] = useState();
-  const [input, setInput] = useState("");
   const typingTimeoutRef = useRef(null);
   const [studentList, setStudentList] = useState([
     {
       id: 1,
+      avatar:
+        "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
       fullName: "Nguyễn Văn Thành",
       address: "Nam Định",
       phone: "0898279836",
@@ -20,6 +22,8 @@ const Container = () => {
     },
     {
       id: 2,
+      avatar:
+        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
       fullName: "Phạm Trung Kiên",
       address: "Hà Nội",
       phone: "0918509286",
@@ -27,6 +31,8 @@ const Container = () => {
     },
     {
       id: 3,
+      avatar:
+        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
       fullName: "Phan Tấn Khang",
       address: "Bắc Ninh",
       phone: "0613509235",
@@ -34,6 +40,8 @@ const Container = () => {
     },
     {
       id: 4,
+      avatar:
+        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
       fullName: "Nguyễn Thành Long",
       address: "Ninh Bình",
       phone: "0923904091",
@@ -41,6 +49,8 @@ const Container = () => {
     },
     {
       id: 5,
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGF2YXRhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       fullName: "Lê Tuấn Tú",
       address: "Hải Dương",
       phone: "0932959000",
@@ -48,6 +58,8 @@ const Container = () => {
     },
   ]);
   const handleSubmitValue = (data) => {
+    console.log(data);
+    console.log(data.image[0].name);
     const newStudentList = [...studentList, data];
     setStudentList(newStudentList);
   };
@@ -107,15 +119,13 @@ const Container = () => {
   };
 
   const handleSearchStudent = (value) => {
+    console.log(studentList);
     const strValue = handleChangeString(value);
     // setInput(strValue);
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
     }
     typingTimeoutRef.current = setTimeout(() => {
-      const searchStudent = [...studentList].filter((item) =>
-        handleChangeString(item.fullName).includes(strValue.toLowerCase())
-      );
       if (value === "") {
         setStudentList([
           {
@@ -155,6 +165,9 @@ const Container = () => {
           },
         ]);
       } else {
+        const searchStudent = [...studentList].filter((item) =>
+          handleChangeString(item.fullName).includes(strValue.toLowerCase())
+        );
         setStudentList(searchStudent);
       }
     }, 300);

@@ -16,7 +16,7 @@ const FormUpdate = ({
         className="p-5 w-full max-w-[500px] mx-auto h-full"
         autoComplete="off"
       >
-        <div className="flex flex-col gap-2 mb-3">
+        <div className="flex flex-col gap-2 mb-1">
           <label htmlFor="id">ID</label>
           <input
             type="text"
@@ -30,7 +30,14 @@ const FormUpdate = ({
             <div className="text-red-500 text-sm">{errors.id?.message}</div>
           )}
         </div>
-        <div className="flex flex-col gap-2 mb-3">
+        <div className="flex flex-col  mb-1">
+          <label htmlFor="id">AVATAR</label>
+          <input type="file" alt="" id="id" {...register("image")} />
+          {errors?.id && (
+            <div className="text-red-500 text-sm">{errors.id?.message}</div>
+          )}
+        </div>
+        <div className="flex flex-col  mb-1">
           <label htmlFor="fullName">Full Name</label>
           <input
             type="text"
@@ -44,7 +51,7 @@ const FormUpdate = ({
         {errors?.fullName && (
           <div className="text-red-500 text-sm">{errors.fullName?.message}</div>
         )}
-        <div className="flex flex-col gap-2 mb-3">
+        <div className="flex flex-col  mb-1">
           <label htmlFor="address">Address</label>
           <input
             type="text"
@@ -58,7 +65,7 @@ const FormUpdate = ({
         {errors?.address && (
           <div className="text-red-500 text-sm">{errors.address?.message}</div>
         )}
-        <div className="flex flex-col gap-2 mb-3">
+        <div className="flex flex-col  mb-1">
           <label htmlFor="phone">Phone</label>
           <input
             type="phone"
@@ -72,7 +79,7 @@ const FormUpdate = ({
         {errors?.phone && (
           <div className="text-red-500 text-sm">{errors.phone?.message}</div>
         )}
-        <div className="flex flex-col gap-2 mb-3">
+        <div className="flex flex-col  mb-1">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -86,15 +93,15 @@ const FormUpdate = ({
         {errors?.email && (
           <div className="text-red-500 text-sm">{errors.email?.message}</div>
         )}
-        <div className="flex flex-col gap-2 mb-5">
+        <div className="flex flex-col  mb-5">
           <button
-            type="update"
+            type="submit"
             className="w-full p-4 bg-blue-600 text-white font-semibold rounded-lg"
           >
             {isSubmitting ? (
               <div className="mx-auto w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin"></div>
             ) : (
-              "Update"
+              "Submit"
             )}
           </button>
         </div>

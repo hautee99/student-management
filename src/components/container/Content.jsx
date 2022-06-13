@@ -15,6 +15,7 @@ const Content = ({
         <thead>
           <tr>
             <th>ID</th>
+            <th>AVATAR</th>
             <th>FULLNAME</th>
             <th>ADDRESS</th>
             <th>PHONE</th>
@@ -26,6 +27,22 @@ const Content = ({
           {studentList.map((item) => (
             <tr key={item.id}>
               <td>{item.id}</td>
+              <td className=" overflow-hidden">
+                {item.avatar ? (
+                  <img
+                    src={item.avatar}
+                    className=" w-28 h-28 rounded-full object-cover"
+                    // alt={`img: ${item.id}`}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src={URL.createObjectURL(item.image[0])}
+                    className=" w-28 h-28 rounded-full object-cover"
+                    alt={`img: ${item.id}`}
+                  />
+                )}
+              </td>
               <td>{item.fullName}</td>
               <td>{item.address}</td>
               <td>{item.phone}</td>

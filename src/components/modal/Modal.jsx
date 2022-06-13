@@ -32,6 +32,7 @@ const Modal = ({
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve();
+        // console.log(data.image[0].name);
         onSubmitValue(data);
         toast("Create student succesfully");
       }, 2000);
@@ -56,7 +57,7 @@ const Modal = ({
       }`}
     >
       <div className="overlay absolute inset-0 bg-black bg-opacity-25"></div>
-      <div className="modal-content p-10 bg-white w-[420px] h-[720px] z-10 relative rounded-lg">
+      <div className="modal-content px-5 bg-white w-[420px] h-auto z-10 relative rounded-lg">
         <span
           onClick={onClick}
           className="absolute bg-white top-0 right-0 cursor-pointer flex justify-center items-center w-10 h-10 rounded-full -translate-y-2/4 translate-x-2/4"
@@ -76,7 +77,7 @@ const Modal = ({
             />
           </svg>
         </span>
-        <div>
+        <div className="h-auto">
           <h1 className="text-xl font-bold text-center">STUDENT</h1>
           {typeModal === "submit" ? (
             <InputHookForm
