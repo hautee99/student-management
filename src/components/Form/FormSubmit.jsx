@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FormSubmit = ({
   handleSubmit,
@@ -7,9 +7,13 @@ const FormSubmit = ({
   register,
   errors,
   isSubmitting,
+  handleResetInput,
 }) => {
+  // const [input, setInput] = useState("");
+  // handleResetInput(setInput(""));
   return (
-    <div>
+    <div className="py-2">
+      <h1 className="text-xl font-bold text-center">ADD STUDENTS</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="p-5 w-full max-w-[500px] mx-auto h-full"
@@ -20,8 +24,7 @@ const FormSubmit = ({
           <input
             type="text"
             id="id"
-            placeholder="Enter your first name"
-            defaultValue={value}
+            placeholder="Enter student ID"
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("id")}
           />
@@ -30,22 +33,15 @@ const FormSubmit = ({
           )}
         </div>
         <div className="flex flex-col  mb-1">
-          <label htmlFor="id">AVATAR</label>
-          <input
-            type="file"
-            alt=""
-            name="avatar"
-            id="image"
-            {...register("image")}
-          />
+          <label htmlFor="imageAvatar">AVATAR</label>
+          <input type="file" alt="" id="image" {...register("image")} />
         </div>
         <div className="flex flex-col  mb-1">
           <label htmlFor="fullName">Full Name</label>
           <input
             type="text"
             id="fullName"
-            placeholder="Enter your first name"
-            defaultValue={value}
+            placeholder="Enter student name"
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("fullName")}
           />
@@ -58,8 +54,7 @@ const FormSubmit = ({
           <input
             type="text"
             id="address"
-            placeholder="Enter your first name"
-            defaultValue={value}
+            placeholder="Enter address"
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("address")}
           />
@@ -72,8 +67,7 @@ const FormSubmit = ({
           <input
             type="phone"
             id="phone"
-            placeholder="Enter your first name"
-            defaultValue={value}
+            placeholder="Enter phone number"
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("phone")}
           />
@@ -86,8 +80,7 @@ const FormSubmit = ({
           <input
             type="email"
             id="email"
-            placeholder="Enter your email address"
-            defaultValue={value}
+            placeholder="Enter email"
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("email")}
           />

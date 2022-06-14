@@ -16,6 +16,9 @@ const Modal = ({
   typeModal,
 }) => {
   const [value, setValue] = useState();
+  const handleResetInput = () => {
+    setValue("");
+  };
   const schemaValidation = yup.object({
     id: yup.string().required("Please enter ID").max(2),
     fullName: yup.string().required("Please enter fullname").max(20),
@@ -34,6 +37,7 @@ const Modal = ({
         resolve();
         // console.log(data.image[0].name);
         onSubmitValue(data);
+        handleResetInput();
         toast("Create student succesfully");
       }, 2000);
     });
@@ -78,7 +82,6 @@ const Modal = ({
           </svg>
         </span>
         <div className="h-auto">
-          <h1 className="text-xl font-bold text-center">STUDENT</h1>
           {typeModal === "submit" ? (
             <InputHookForm
               isSubmitting={isSubmitting}

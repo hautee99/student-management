@@ -10,7 +10,8 @@ const FormUpdate = ({
   handleUpdateValue,
 }) => {
   return (
-    <div>
+    <div className="py-2">
+      <h1 className="text-xl font-bold text-center">UPDATE STUDENTS</h1>
       <form
         onSubmit={handleSubmit(onUpdate)}
         className="p-5 w-full max-w-[500px] mx-auto h-full"
@@ -21,7 +22,7 @@ const FormUpdate = ({
           <input
             type="text"
             id="id"
-            placeholder="Enter your first name"
+            placeholder="Enter student ID"
             defaultValue={value}
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("id")}
@@ -32,17 +33,14 @@ const FormUpdate = ({
         </div>
         <div className="flex flex-col  mb-1">
           <label htmlFor="id">AVATAR</label>
-          <input type="file" alt="" id="id" {...register("image")} />
-          {errors?.id && (
-            <div className="text-red-500 text-sm">{errors.id?.message}</div>
-          )}
+          <input type="file" alt="" id="image" {...register("image")} />
         </div>
         <div className="flex flex-col  mb-1">
           <label htmlFor="fullName">Full Name</label>
           <input
             type="text"
             id="fullName"
-            placeholder="Enter your first name"
+            placeholder="Enter fullname"
             defaultValue={value}
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("fullName")}
@@ -56,7 +54,7 @@ const FormUpdate = ({
           <input
             type="text"
             id="address"
-            placeholder="Enter your first name"
+            placeholder="Enter address"
             defaultValue={value}
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("address")}
@@ -70,7 +68,7 @@ const FormUpdate = ({
           <input
             type="phone"
             id="phone"
-            placeholder="Enter your first name"
+            placeholder="Enter phone"
             defaultValue={value}
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("phone")}
@@ -84,7 +82,7 @@ const FormUpdate = ({
           <input
             type="email"
             id="email"
-            placeholder="Enter your email address"
+            placeholder="Enter email"
             defaultValue={value}
             className="p-2 rounded-md bg-gray-100 border border-gray-100"
             {...register("email")}

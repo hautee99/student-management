@@ -28,6 +28,17 @@ const Content = ({
             <tr key={item.id}>
               <td>{item.id}</td>
               <td className=" overflow-hidden">
+                {/* <img
+                  src={
+                    item.avatar
+                      ? item.avatar
+                      : item?.image[0]
+                      ? URL.createObjectURL(item.image[0])
+                      : "No image"
+                  }
+                  className=" w-28 h-28 rounded-full object-cover"
+                  alt=""
+                /> */}
                 {item.avatar ? (
                   <img
                     src={item.avatar}
@@ -35,12 +46,14 @@ const Content = ({
                     // alt={`img: ${item.id}`}
                     alt=""
                   />
-                ) : (
+                ) : item?.image[0] ? (
                   <img
                     src={URL.createObjectURL(item.image[0])}
                     className=" w-28 h-28 rounded-full object-cover"
                     alt={`img: ${item.id}`}
                   />
+                ) : (
+                  "No image"
                 )}
               </td>
               <td>{item.fullName}</td>

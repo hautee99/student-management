@@ -4,12 +4,7 @@ import InputSearch from "../header/InputSearch";
 import { useModalClose } from "../hooks/useModalClose";
 import Modal from "../modal/Modal";
 
-const Header = ({
-  onClickModal,
-  handleSubmitValue,
-  handleInputValue,
-  onInputValue,
-}) => {
+const Header = ({ handleSubmitValue, handleInputValue }) => {
   const { modal, handleModalClose } = useModalClose();
   return (
     <div>
