@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import FormSubmit from "../Form/FormSubmit";
-import FormUpdate from "../Form/FormUpdate";
+import FormSubmit from "../form/FormSubmit";
+import FormUpdate from "../form/FormUpdate";
 const InputHookForm = ({
   handleSubmit,
   onSubmit,
